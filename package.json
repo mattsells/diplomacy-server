@@ -1,0 +1,19 @@
+{
+  "name": "diplomacy-server",
+  "version": "1.0.0",
+  "description": "Server for Diplomacy board game clone",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattsells/diplomacy-server.git"
+  },
+  "author": "Matthew Sells",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/mattsells/diplomacy-server/issues"
+  },
+  "homepage": "https://github.com/mattsells/diplomacy-server#readme"
+}
