@@ -6,6 +6,8 @@
 	"scripts": {
 		"build": "webpack",
 		"dev": "nodemon ./src/index.ts",
+		"lint:check": "eslint ./",
+		"lint:fix": "eslint --fix ./",
 		"prettier:check": "prettier --check .",
 		"prettier:fix": "prettier --write .",
 		"start": "node ./build/index.js",

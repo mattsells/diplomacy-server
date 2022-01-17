@@ -6,7 +6,7 @@ function startServer(): void {
 
 	app.use(morgan('common'));
 
-	app.get('/health', (req, res) => {
+	app.get('/health', (_req, res) => {
 		res.send({ success: true });
 	});
 
