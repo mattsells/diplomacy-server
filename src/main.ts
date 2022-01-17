@@ -1,13 +1,18 @@
+import { PrismaClient } from '@prisma/client';
 import express from 'express';
 import morgan from 'morgan';
 
-function startServer(): void {
+async function startServer(): Promise<void> {
 	const app = express();
+
+	const db = new PrismaClient();
+
+	const users = await db.user.findMany();
 
 	app.use(morgan('common'));
 
 	app.get('/health', (_req, res) => {
-		res.send({ success: true });
+		res.send({ success: true, users });
 	});
 
 	app.listen(3000, () => {

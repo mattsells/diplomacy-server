@@ -6,3 +6,6 @@ build
 
 # Workspace settings
 .vscode
+
+# Configuration
+.env
