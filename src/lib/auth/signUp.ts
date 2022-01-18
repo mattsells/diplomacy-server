@@ -6,7 +6,7 @@ import db from '@/db';
 
 export default function apply(): void {
 	passport.use(
-		'sign-in',
+		'sign-up',
 		new Strategy(
 			{
 				usernameField: 'user[email]',
@@ -15,24 +15,16 @@ export default function apply(): void {
 			},
 			async (email, password, done) => {
 				try {
-					const user = await db.user.findUnique({
-						where: { email },
+					const encryptedPassword = await bcrypt.hash(password, 10);
+
+					const user = await db.user.create({
+						data: {
+							email,
+							encryptedPassword,
+						},
 					});
 
-					if (!user) {
-						return done(null, false);
-					}
-
-					const isPasswordValid = await bcrypt.compare(
-						password,
-						user.encryptedPassword,
-					);
-
-					if (!isPasswordValid) {
-						return done(null, false);
-					}
-
-					return done(null, user);
+					done(null, user);
 				} catch (err) {
 					done(err);
 				}

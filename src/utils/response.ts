@@ -23,7 +23,7 @@ type ErrorResponse = {
 	data?: DynamicObject | null;
 };
 
-function formatSuccess<T extends DynamicObject = DynamicObject>(
+function success<T extends DynamicObject = DynamicObject>(
 	data: T,
 ): SuccessResponse {
 	return {
@@ -32,4 +32,11 @@ function formatSuccess<T extends DynamicObject = DynamicObject>(
 	};
 }
 
-export { formatSuccess };
+function fail<T extends DynamicObject = DynamicObject>(data: T): FailResponse {
+	return {
+		status: ResponseStatus.FAIL,
+		data,
+	};
+}
+
+export { fail, success };
