@@ -1,28 +1,30 @@
 import { Request, Response, Router } from 'express';
 import passport from 'passport';
 
-import { success } from '@/utils/response';
+import { createJwtToken } from '@/utils/auth';
+import { format } from '@/utils/response';
 
 const router = Router();
 
 router.post(
 	'/sign_up',
 	passport.authenticate('sign-up', { session: false }),
-	signUp,
+	respondWithToken,
 );
 
 router.post(
 	'/sign_in',
 	passport.authenticate('sign-in', { session: false }),
-	signIn,
+	respondWithToken,
 );
 
 export default router;
 
-function signUp(req: Request, res: Response): void {
-	res.json(success({ user: req.user || null }));
-}
+function respondWithToken(req: Request, res: Response): void {
+	if (!req.user) {
+		throw new Error('No user present in request');
+	}
 
-function signIn(req: Request, res: Response): void {
-	res.json(success({ user: req.user || null }));
+	const token = createJwtToken(req.user);
+	res.json(format.success({ token, user: req.user }));
 }
