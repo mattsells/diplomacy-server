@@ -1,9 +1,8 @@
 import { Router } from 'express';
-import passport from 'passport';
 
 import auth from './auth';
-import health from './health';
 import error from './error';
+import health from './health';
 
 const router = Router();
 
@@ -15,6 +14,5 @@ router.use('/health', health);
 router.use('/error', error);
 
 // Protected routes
-// router.use('/v1', passport.authenticate('jwt', { session: false }), router.v1);
 
 export default router;

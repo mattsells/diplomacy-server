@@ -1,9 +1,9 @@
 import { Request, Response, Router } from 'express';
 import passport from 'passport';
 
+import ServerError from '@/lib/error/ServerError';
 import { createJwtToken } from '@/utils/auth';
 import { format } from '@/utils/response';
-import ServerError from '@/lib/error/ServerError';
 
 const router = Router();
 
@@ -16,11 +16,7 @@ router.post(
 			}
 
 			req.logIn(user, { session: false }, (err) => {
-				if (err) {
-					next(err);
-				}
-
-				next();
+				return err ? next(err) : next();
 			});
 		})(req, res, next);
 	},
@@ -44,11 +40,7 @@ router.post(
 			}
 
 			req.logIn(user, { session: false }, (err) => {
-				if (err) {
-					next(err);
-				}
-
-				next();
+				return err ? next(err) : next();
 			});
 		})(req, res, next);
 	},
