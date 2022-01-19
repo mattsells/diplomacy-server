@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import passport from 'passport';
 
-import ServerError from '@/lib/error/ServerError';
+import { InternalServerError, UnauthorizedError } from '@/lib/error';
 import { createJwtToken } from '@/utils/auth';
 import { format } from '@/utils/response';
 
@@ -12,7 +12,7 @@ router.post(
 	(req, res, next) => {
 		passport.authenticate('sign-up', (err, user) => {
 			if (err) {
-				return next(new ServerError(500, 'error', err.message));
+				return next(err);
 			}
 
 			req.logIn(user, { session: false }, (err) => {
@@ -28,12 +28,12 @@ router.post(
 	(req, res, next) => {
 		passport.authenticate('sign-in', (err, user) => {
 			if (err) {
-				return next(new ServerError(500, 'error', err.message));
+				return next(err);
 			}
 
 			if (!user) {
 				return next(
-					new ServerError(401, 'fail', 'User not found', {
+					new UnauthorizedError({
 						user: 'Invalid email or password',
 					}),
 				);
@@ -51,7 +51,7 @@ export default router;
 
 function respondWithToken({ user }: Request, res: Response): void {
 	if (!user) {
-		throw new Error('No user present in request');
+		throw new InternalServerError('No user present in request');
 	}
 
 	const token = createJwtToken(user);

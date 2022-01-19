@@ -11,7 +11,6 @@ export default function apply(): void {
 			{
 				usernameField: 'user[email]',
 				passwordField: 'user[password]',
-				session: false,
 			},
 			async (email, password, done) => {
 				try {

@@ -15,7 +15,9 @@ describe('createJwtToken()', () => {
 	});
 
 	it('creates a token with the provided user', () => {
-		process.env.JWT_SECRET = 'secret';
+		const secret = 'secret';
+
+		process.env.JWT_SECRET = secret;
 
 		const user = {
 			id: 1,
@@ -24,7 +26,7 @@ describe('createJwtToken()', () => {
 
 		const token = createJwtToken(user);
 
-		const data = jwt.decode(token);
+		const data = jwt.verify(token, secret);
 
 		expect(data).toMatchObject({ user });
 	});
