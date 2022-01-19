@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { createJwtToken } from './auth';
+import { createJwtToken } from '../auth';
 
 describe('createJwtToken()', () => {
 	const originalEnv = process.env;
