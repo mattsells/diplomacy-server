@@ -6,7 +6,7 @@ import db from '@/db';
 
 export default function apply(): void {
 	passport.use(
-		'sign-in',
+		'authentication',
 		new Strategy(
 			{
 				usernameField: 'user[email]',

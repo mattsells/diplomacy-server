@@ -7,7 +7,7 @@ import { ConflictError } from '@/lib/error';
 
 export default function apply(): void {
 	passport.use(
-		'sign-up',
+		'registration',
 		new Strategy(
 			{
 				usernameField: 'user[email]',

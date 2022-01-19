@@ -8,9 +8,9 @@ import { format } from '@/utils/response';
 const router = Router();
 
 router.post(
-	'/sign_up',
+	'/registrations',
 	(req, res, next) => {
-		passport.authenticate('sign-up', (err, user) => {
+		passport.authenticate('registration', (err, user) => {
 			if (err) {
 				return next(err);
 			}
@@ -24,9 +24,9 @@ router.post(
 );
 
 router.post(
-	'/sign_in',
+	'/sessions',
 	(req, res, next) => {
-		passport.authenticate('sign-in', (err, user) => {
+		passport.authenticate('authentication', (err, user) => {
 			if (err) {
 				return next(err);
 			}

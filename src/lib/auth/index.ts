@@ -1,7 +1,7 @@
-import applySignIn from './signIn';
-import applySignUp from './signUp';
+import applyAuthenticationStrategy from './authentication';
+import applyRegistrationStrategy from './registration';
 
 export default function applyAuth(): void {
-	applySignIn();
-	applySignUp();
+	applyAuthenticationStrategy();
+	applyRegistrationStrategy();
 }
