@@ -24,7 +24,7 @@ export default function apply(): void {
 					if (userWithEmail) {
 						return done(
 							new ConflictError({
-								email: 'Email address already in use',
+								'user.email': 'Email address already in use',
 							}),
 						);
 					}

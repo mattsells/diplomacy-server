@@ -13,6 +13,17 @@ const router = Router();
 
 router.post(
 	'/registrations',
+	body('user.email').isEmail().withMessage('Not a valid email address'),
+	body('user.password')
+		.isLength({ min: 6 })
+		.custom((value, { req }) => {
+			if (value !== req.body.user.confirmPassword) {
+				throw new Error('Does not match confirmation');
+			}
+
+			return true;
+		}),
+	validateRequest,
 	(req, res, next) => {
 		passport.authenticate('registration', (err, user) => {
 			if (err) {
