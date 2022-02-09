@@ -19,6 +19,8 @@ export default function errorDistributor(
 		} else {
 			res.json(format.fail(error.data || {}));
 		}
+
+		return next();
 	}
 
 	// Send default error
