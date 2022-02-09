@@ -16,6 +16,7 @@ router.post(
 	body('user.email').isEmail().withMessage('Not a valid email address'),
 	body('user.password')
 		.isLength({ min: 6 })
+		.withMessage('Must be at least 6 characters in length')
 		.custom((value, { req }) => {
 			if (value !== req.body.user.confirmPassword) {
 				throw new Error('Does not match confirmation');
