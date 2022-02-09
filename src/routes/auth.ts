@@ -1,7 +1,9 @@
 import { Request, Response, Router } from 'express';
+import { body } from 'express-validator';
 import passport from 'passport';
 
 import { InternalServerError, UnauthorizedError } from '@/lib/error';
+import validateRequest from '@/lib/validation/distributor';
 import { assertIsUser } from '@/models/user';
 import { createJwtToken } from '@/utils/auth';
 import { removeProperties } from '@/utils/data';
@@ -27,6 +29,10 @@ router.post(
 
 router.post(
 	'/sessions',
+	// TODO: Use i18n for messages; centralize error message store
+	body('user.email').isEmail().withMessage('Not a valid email address'),
+	// TODO: Maybe move this all to a single helper
+	validateRequest,
 	(req, res, next) => {
 		passport.authenticate('authentication', (err, user) => {
 			if (err) {
