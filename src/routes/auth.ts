@@ -13,7 +13,7 @@ const router = Router();
 
 router.post(
 	'/registrations',
-	body('user.email').isEmail().withMessage('Not a valid email address'),
+	body('user.email').trim().isEmail().withMessage('Not a valid email address'),
 	body('user.password')
 		.isLength({ min: 6 })
 		.withMessage('Must be at least 6 characters in length')
@@ -42,7 +42,7 @@ router.post(
 router.post(
 	'/sessions',
 	// TODO: Use i18n for messages; centralize error message store
-	body('user.email').isEmail().withMessage('Not a valid email address'),
+	body('user.email').trim().isEmail().withMessage('Not a valid email address'),
 	// TODO: Maybe move this all to a single helper
 	validateRequest,
 	(req, res, next) => {
