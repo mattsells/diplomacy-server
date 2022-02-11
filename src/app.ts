@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 import passport from 'passport';
@@ -13,6 +14,10 @@ applyAuth();
 
 // Logging
 app.use(morgan('common'));
+
+// CORS handling
+// TODO: Modify settings for production
+app.use(cors());
 
 // Request parsing
 app.use(express.json());
